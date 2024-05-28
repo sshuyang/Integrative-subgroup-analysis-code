@@ -95,7 +95,7 @@ eps1=normrnd(0,0.5,1,n);
 X=mu_1+tem1'+eps1;
 Y=binornd(1,mu_2,1,n);
 RI2_gauslogit(m) = RandIndex(Y,class_id_ture);
-[ theta1,theta2,V,beta1,beta2]  = isa_gauslogit_MCP( X,Y,Z);
+[ theta1,theta2,V,beta1,beta2]  = isa_gauslogit_MCP( X,Y,Z,3);
 
 
 
