@@ -76,6 +76,26 @@ Y=mu_2+tem2'+eps2;
 [no_class,class_id] = group_assign_vertice(Z_output,n);
 
 
+%%% Case3
+G=2;
+p=50;
+n=100;
+mu=zeros(p,1);
+class_id_ture = repelem([1,2],n/G);
+beta_1=[1,1,1,1,1,zeros(1,p-5)]';
+beta_2=[1,1,1,1,1,zeros(1,p-5)]';
+alpha_1=[repmat(-2,1,n/G),repmat(2,1,n/G)];
+alpha_2=[repmat(-4,1,n/G),repmat(4,1,n/G)];
+Z=mvnrnd(mu,eye(p),n);
+Z=zscore(Z);
+mu_1=[repmat(-2,1,n/G),repmat(2,1,n/G)];
+mu_2=exp(alpha_2+(Z*beta_2)')./(1+exp(alpha_2+(Z*beta_2)'));
+tem1=Z*beta_1;
+eps1=normrnd(0,0.5,1,n);
+X=mu_1+tem1'+eps1;
+Y=binornd(1,mu_2,1,n);
+RI2_gauslogit(m) = RandIndex(Y,class_id_ture);
+[ theta1,theta2,V,beta1,beta2]  = isa_gauslogit_MCP( X,Y,Z);
 
 
 
